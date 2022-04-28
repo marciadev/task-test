@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
-export const firebaseConfig = {
+const firebaseConfig = {
   apiKey: "AIzaSyBIQANDyOBBaiuHd75iNc7iIy1MarNmMtc",
   authDomain: "todo-app-e6199.firebaseapp.com",
   projectId: "todo-app-e6199",

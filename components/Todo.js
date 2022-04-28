@@ -2,7 +2,7 @@ import { useState } from 'react'
 import CheckCicleIcon from '@mui/icons-material/CheckCircle'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
-import styles from '../../styles/main.module.css'
+import styles from '.././styles/main.module.css'
 
 
 export default function Todo ({todo, toggleComplete, handleDelete, handleEdit, todos, setTodos}){

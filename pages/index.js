@@ -1,10 +1,10 @@
 import { useState, useEffect } from 'react'
 import styles from '../styles/main.module.css'
 import style from '../styles/index.module.css'
-import { db } from './firebase'
+import { db } from '.././firebase.js'
 import { collection, query, onSnapshot, doc, updateDoc, deleteDoc } from 'firebase/firestore'
-import AddTodo from './components/AddTodo'
-import Todo from './components/Todo'
+import AddTodo from '../components/AddTodo'
+import Todo from '../components/Todo'
 
 export default function Home() {
 

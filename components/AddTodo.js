@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import { db } from '../firebase'
+import { db } from '.././firebase'
 import { collection, addDoc } from 'firebase/firestore'
-import style from '../../styles/index.module.css'
-import styles from '../../styles/main.module.css'
+import style from '.././styles/index.module.css'
+import styles from '.././styles/main.module.css'
 
 export default function AddTodo(){
     const [task, setTask] = useState('')

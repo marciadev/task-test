@@ -22,9 +22,10 @@ export default function Home() {
     return ()=> unsub()
   }, [])
 
-  const handleEdit = async(todo, task) =>{
-    await updateDoc(doc(db, "todos", todo.id), {task: task})
-  }
+  const handleEdit = async (todo, newTask) => {
+    console.log(newTask)
+    await updateDoc(doc(db, "todos", todo.id), { task: newTask });
+  };
 
   const toggleComplete = async (todo) => {
     await updateDoc(doc(db, "todos", todo.id), {
@@ -38,15 +39,15 @@ export default function Home() {
   
 
   return (
-    <div>
+    <div className={styles.container}>
       <nav className={style.navbar}><h1 className={style.title}>TODO LIST</h1></nav>
       <main className={styles.main}>
-        <div className={style.container}>
-          <h3>TODO LIST</h3>
+        <div className={styles.container}>
+          <h3 className={styles.container}>TODO LIST</h3>
           <div>
           <AddTodo/>
           </div>
-          <div>
+          <div className={styles.todo_container}>
             {todos.map((todo)=> (
               <Todo 
                 key={todo.id}
@@ -54,6 +55,8 @@ export default function Home() {
                 toggleComplete={toggleComplete}
                 handleDelete={handleDelete}
                 handleEdit={handleEdit}
+                todos={todos}
+                setTodos={setTodos}
               />
             ))}
           </div>

@@ -4,7 +4,7 @@ import { collection, addDoc } from 'firebase/firestore'
 import style from '../../styles/index.module.css'
 import styles from '../../styles/main.module.css'
 
-export default function (){
+export default function AddTodo(){
     const [task, setTask] = useState('')
 
     const handleSubmit = async (e) => {

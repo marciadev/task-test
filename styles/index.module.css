@@ -1,0 +1,39 @@
+.navbar {
+    background-color: rgb(35, 54, 54);
+    height: 100px;
+}
+
+.container {
+    background-color: rgb(240, 158, 6);
+    padding: 200px 400px 200px 400px;
+    justify-content: space-between;
+}
+
+.title {
+    padding-left: 150px;
+    display: -webkit-inline-box;
+    color: white;
+    font-size: 15px;
+    padding-top: 25px;
+}
+
+.btn {
+    background-color: rgb(35, 54, 54);
+    color: white;
+    height: 50px;
+    width: 100px;
+}
+
+.btn:hover{
+    background-color: white;
+    color: rgb(35, 54, 54);
+}
+
+.input {
+    height: 50px;
+    width: 300px;
+}
+
+.form {
+    display: flex;
+}

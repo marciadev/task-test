@@ -2,8 +2,3 @@
 
 import { tasks } from './_tasks'
 
-console.log(tasks)
-
-export default (req, res) => {
-  res.status(200).json(tasks)
-}

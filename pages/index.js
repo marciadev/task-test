@@ -1,55 +1,64 @@
-import Head from 'next/head'
+import { useState, useEffect } from 'react'
 import styles from '../styles/main.module.css'
+import style from '../styles/index.module.css'
+import { db } from './firebase'
+import { collection, query, onSnapshot, doc, updateDoc, deleteDoc } from 'firebase/firestore'
+import AddTodo from './components/AddTodo'
+import Todo from './components/Todo'
 
 export default function Home() {
+
+  const [todos, setTodos] = useState([]);
+
+  useEffect(()=>{
+    const q = query(collection(db, "todos"))
+    const unsub = onSnapshot(q, (querySnapshot)=>{
+      let todosArray =[]
+      querySnapshot.forEach((doc)=>{
+        todosArray.push({...doc.data(), id: doc.id})
+      })
+      setTodos(todosArray)
+    })
+    return ()=> unsub()
+  }, [])
+
+  const handleEdit = async(todo, task) =>{
+    await updateDoc(doc(db, "todos", todo.id), {task: task})
+  }
+
+  const toggleComplete = async (todo) => {
+    await updateDoc(doc(db, "todos", todo.id), {
+      completed: !todo.completed
+    })
+  }
+
+  const handleDelete = async (id) => {
+    await deleteDoc(doc(db, "todos", id))
+  }
+  
+
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Next JS - Task Manager</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
+    <div>
+      <nav className={style.navbar}><h1 className={style.title}>TODO LIST</h1></nav>
       <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to Task Manager
-        </h1>
-
-        <p className={styles.description}>
-          This is based in: <a href="https://nextjs.org">Next.js!</a><br/>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
+        <div className={style.container}>
+          <h3>TODO LIST</h3>
+          <div>
+          <AddTodo/>
+          </div>
+          <div>
+            {todos.map((todo)=> (
+              <Todo 
+                key={todo.id}
+                todo={todo}
+                toggleComplete={toggleComplete}
+                handleDelete={handleDelete}
+                handleEdit={handleEdit}
+              />
+            ))}
+          </div>
         </div>
       </main>
     </div>
-  )
+  );
 }

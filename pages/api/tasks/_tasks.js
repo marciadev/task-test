@@ -14,3 +14,7 @@ export const tasks = [{
   complete: false,
   color: '#00ff00'
 }]
+
+// export default (req, res) =>{
+//   res.status(200).json({name: 'Moe'})
+// }
